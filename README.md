@@ -1,54 +1,132 @@
-Windows Audio & Volume Controller
+# Sound Controller (Windows Audio & Volume Utility)
 
-A lightweight, low-resource background utility built with [AutoHotkey v2](https://www.autohotkey.com/) that provides granular per-application volume control and instant audio output device switching.
+A lightweight, low-resource background utility built with AutoHotkey v2 that provides granular per-application volume control and instant audio output device switching.
 
 ## ✨ Features
-- **Per-App Volume Control**: Change the volume of specific apps (Spotify, Opera GX) or whatever window is currently active without affecting master volume.
-- **Fine-Tuned Adjustments**: Volume increments in 2% steps for perfect audio balancing.
-- **Output Device Switching**: Instantly swap your Default Playback Device (e.g., Speakers to Headphones) with a single keystroke.
-- **Custom Dark-Mode Tray Menu**: Clean, customized system tray menu that natively supports Windows Dark Mode.
+
+* **Dynamic Configuration (`config.ini`)**
+
+  * Change target applications and audio devices without recompiling the application.
+
+* **Per-Application Volume Control**
+
+  * Adjust the volume of configured applications in smooth 2% increments.
+
+* **Active Window Volume Control**
+
+  * Control the volume of whichever application is currently focused.
+
+* **Output Device Switching**
+
+  * Instantly switch between audio output devices with a single key press.
+
+* **Custom Dark-Mode Tray Menu**
+
+  * Clean system tray integration with native Windows Dark Mode support.
+
+---
+
+## 📂 Folder Structure
+
+Your folder should be structured as follows:
+
+```text
+SoundController/
+│
+├── SoundController.exe       # Compiled AutoHotkey application
+├── config.ini                # Auto-generated on first run
+│
+├── Nircmd/
+│   └── nircmd.exe            # Required for volume control
+│
+└── SoundVolumeView/
+    └── SoundVolumeView.exe   # Required for audio device switching
+```
+
+> **Note:** Download `nircmd.exe` and `SoundVolumeView.exe` from NirSoft before running the application.
+
+---
+
+## ⚙️ Configuration
+
+On first launch, the application automatically creates a `config.ini` file in the same directory.
+
+Example configuration:
+
+```ini
+[Applications]
+App1=Spotify.exe
+App2=opera.exe
+
+[Devices]
+Device1=IEM
+Device2=Headset
+Device3=Speakers
+```
+
+### Applications
+
+Specify executable names for the applications whose volume you want to control.
+
+### Devices
+
+Specify the exact names of your audio output devices as they appear in Windows.
+
+> **Important:** After making changes to `config.ini`, restart `SoundController.exe` for the new settings to take effect.
+
+---
 
 ## ⌨️ Default Keybindings
 
-### Volume Controls (2% increments)
-| Application | Volume Up | Volume Down | Toggle Mute |
-| :--- | :---: | :---: | :---: |
-| **Spotify** | `F16` | `F17` | `F22` |
-| **Opera GX** | `F18` | `F19` | `F23` |
-| **Active Window** | `F20` | `F21` | `F24` |
+### Volume Controls (2% Increments)
+
+| Target        | Volume Up | Volume Down | Toggle Mute |
+| ------------- | --------- | ----------- | ----------- |
+| App 1         | F16       | F17         | F22         |
+| App 2         | F18       | F19         | F23         |
+| Active Window | F20       | F21         | F24         |
 
 ### Audio Output Switching
-| Action | Keybinding |
-| :--- | :---: |
-| Set Default Device to **Speakers** | `F25` |
-| Set Default Device to **Headphones** | `F26` |
 
-> **Note:** F16-F26 are used for maximum compatibility with macro pads, QMK/VIA programmable keyboards, and dedicated media keys. You can easily map these triggers to your specific hardware.
+| Action                         | Keybinding |
+| ------------------------------ | ---------- |
+| Set Default Output to Device 1 | F13        |
+| Set Default Output to Device 2 | F14        |
+| Set Default Output to Device 3 | F15        |
 
-## ⚙️ Prerequisites
-This script utilizes two excellent command-line tools from NirSoft to handle the Windows audio mixing under the hood. **These must be placed in the exact same folder as the `.exe` or `.ahk` script.**
+---
 
-1. [NirCmd](https://www.nirsoft.net/utils/nircmd.html) (Used for volume control)
-2. [SoundVolumeView](https://www.nirsoft.net/utils/sound_volume_view.html) (Used for device switching)
+## 🚀 Run at Startup
 
-## 🚀 Installation & Setup
+To automatically launch Sound Controller when Windows starts:
 
-1. Download the latest compiled `.exe` from the Releases tab (or clone the repository to run the `.ahk` script directly).
-2. Download `nircmd.exe` and `SoundVolumeView.exe` from the links above.
-3. Place all three files together in a dedicated folder.
-4. Run the executable!
+1. Right-click `SoundController.exe`.
+2. Select **Create shortcut**.
+3. Press **Win + R**.
+4. Type:
 
-### Run on Startup
-If you want this utility to launch automatically when you boot your PC:
-1. Right-click the `.exe` and select **Create shortcut**.
-2. Press `Win + R`, type `shell:startup`, and hit Enter.
-3. Move the **shortcut** into the Startup folder that opens. 
-*(It will now appear in your Task Manager's "Startup apps" tab!)*
+```text
+shell:startup
+```
 
-## 🛠️ Customization 
-If you are running the source `.ahk` file and want to tweak it for your setup:
-* **Device Names:** If your devices are named differently in Windows, open `SoundVolumeView`, find the exact name of your output device under the "Name" column, and replace `"Speakers"` or `"Headphones"` in the script.
-* **Target Applications:** You can swap `Spotify.exe` or `opera.exe` for any other application executable (e.g., `discord.exe`).
+5. Press **Enter**.
+6. Move the shortcut into the Startup folder.
 
-## 📝 License
-Feel free to fork, modify, and use this script in your own personal setups!
+---
+
+## 🛠 Dependencies
+
+This project relies on the following external utilities:
+
+* NirCmd
+* SoundVolumeView
+
+Both are available from the NirSoft website.
+
+---
+
+## 📜 License
+
+Feel free to fork, modify, and use this project in your own personal setups.
+
+Contributions, improvements, and custom adaptations are welcome.
