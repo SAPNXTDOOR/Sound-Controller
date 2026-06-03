@@ -1,4 +1,4 @@
-"""# Windows Audio & Volume Controller
+Windows Audio & Volume Controller
 
 A lightweight, low-resource background utility built with [AutoHotkey v2](https://www.autohotkey.com/) that provides granular per-application volume control and instant audio output device switching.
 
