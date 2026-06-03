@@ -52,8 +52,3 @@ If you are running the source `.ahk` file and want to tweak it for your setup:
 
 ## 📝 License
 Feel free to fork, modify, and use this script in your own personal setups!
-"""
-
-with open("README.md", "w", encoding="utf-8") as f:
-    f.write(content)
-print("README.md generated successfully.")
